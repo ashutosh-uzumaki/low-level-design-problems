@@ -5,6 +5,7 @@ public class Board {
     Symbol[][] board;
 
     public Board(int size){
+        this.size = size;
         board = new Symbol[size][size];
     }
 
@@ -16,7 +17,10 @@ public class Board {
     }
 
     public boolean isAValidCell(int x, int y){
-        if(board[x][y] != null){
+        if(x < 0 || y >= size){
+            return false;
+        }
+        else if(board[x][y] != null){
             return false;
         }
         return true;

@@ -20,15 +20,27 @@ public class TicTacToeGame {
     }
 
     String startGame(){
-        boolean noWinner = false;
-        while(!noWinner){
+        boolean winner = false;
+        while(!winner){
             Player currPlayer = players.removeFirst();
-            System.out.println("Current Player turn: "+currPlayer+" and your symbol  is: "+ currPlayer.getSymbol());
             Scanner scn = new Scanner(System.in);
+
+            for (int i = 0; i < board.getSize(); i++) {
+                for (int j = 0; j < board.getSize(); j++){
+                    String cellValue = (board.getCellValue(i, j) == null) ? " " : board.getCellValue(i, j).toString();
+                    System.out.print(cellValue);
+                    if (j < board.getSize() - 1) {
+                        System.out.print("|");
+                    }
+                }
+                System.out.println(); // Move to a new line after each row
+            }
+
+            System.out.println("Current Player turn: "+currPlayer.getName()+" and your symbol  is: "+ currPlayer.getSymbol());
             System.out.print("Please enter the row and col you want to fill: ");
             int row = scn.nextInt();
             int col = scn.nextInt();
-
+            System.out.println((board.isAValidCell(row, col)));
             if(!board.isAValidCell(row, col)){
                 System.out.println("Incorrect position chosen");
                 players.addFirst(currPlayer);
@@ -37,8 +49,9 @@ public class TicTacToeGame {
             board.updateBoard(currPlayer.getSymbol(), row, col);
             players.addLast(currPlayer);
 
-            noWinner = isThereAWinner(row, col, currPlayer.getSymbol());
-            if(noWinner){
+            winner = isThereAWinner(row, col, currPlayer.getSymbol());
+            System.out.println(winner);
+            if(winner){
                 return "Player: "+currPlayer.getName()+" has won the game";
             }
         }

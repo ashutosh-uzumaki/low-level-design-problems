@@ -2,7 +2,7 @@ package org.ashutosh.entities;
 
 public class Player {
     public String name;
-
+    public Symbol symbol;
     public String getName() {
         return name;
     }
@@ -18,8 +18,6 @@ public class Player {
     public void setSymbol(Symbol symbol) {
         this.symbol = symbol;
     }
-
-    Symbol symbol;
 
     public Player(String name, Symbol symbol){
         this.name = name;
